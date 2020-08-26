@@ -21,10 +21,26 @@ class Chapter1 : BaseActivity(R.layout.activity_chapter1) {
     }
 
 
+}
+
+class Dollars(private val count: Int) : Money() {
+    override fun times(mul: Int): Int {
+        amount = count
+        return amount * mul
+    }
 
 }
-class Dollars(private val count: Int) {
-    fun times(mul: Int): Int {
-        return count * mul
+
+class Franc(private val count: Int) : Money() {
+
+    override fun times(mul: Int): Int {
+        amount = count
+        return amount * mul
     }
+}
+
+abstract class Money {
+    protected var amount: Int = 0
+
+    abstract fun times(mul: Int): Int
 }
