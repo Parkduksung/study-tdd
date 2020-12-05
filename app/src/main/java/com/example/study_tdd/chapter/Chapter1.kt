@@ -17,7 +17,6 @@ class Chapter1 : BaseActivity(R.layout.activity_chapter1) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
     }
 
 
@@ -41,6 +40,6 @@ class Franc(private val count: Int) : Money() {
 
 abstract class Money {
     protected var amount: Int = 0
-
     abstract fun times(mul: Int): Int
+
 }
