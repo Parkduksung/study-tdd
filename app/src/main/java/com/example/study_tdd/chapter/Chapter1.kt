@@ -1,7 +1,7 @@
 package com.example.study_tdd.chapter
 
 import android.os.Bundle
-import com.example.study_tdd.BaseActivity
+import com.example.study_tdd.base.BaseActivity
 import com.example.study_tdd.R
 
 class Chapter1 : BaseActivity(R.layout.activity_chapter1) {
