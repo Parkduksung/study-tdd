@@ -1,6 +1,9 @@
-package com.rsupport.tdd.permission
+package com.example.study_tdd.permission
 
 import androidx.core.content.PermissionChecker
+import com.example.study_tdd.presenter.ActivityHandler
+import com.example.study_tdd.presenter.CheckSelfPermission
+import com.example.study_tdd.presenter.FilePermission
 import io.mockk.every
 import io.mockk.mockk
 import junit.framework.Assert.assertFalse
@@ -23,7 +26,6 @@ class AdvancedPermissionTest {
             activityHandler = activityHandler
         )
         assertFalse(filePermission.request())
-
     }
 
     @Test

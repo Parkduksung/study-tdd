@@ -1,4 +1,4 @@
-package com.rsupport.tdd.permission
+package com.example.study_tdd.presenter
 
 import androidx.core.content.PermissionChecker
 

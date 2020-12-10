@@ -1,6 +1,6 @@
-package com.rsupport.tdd.permission.domain
+package com.example.study_tdd.permission.domain
 
-import com.rsupport.tdd.permission.AndroidPermission
+import com.example.study_tdd.presenter.AndroidPermission
 import junit.framework.Assert.assertFalse
 import junit.framework.Assert.assertTrue
 import kotlinx.coroutines.runBlocking
