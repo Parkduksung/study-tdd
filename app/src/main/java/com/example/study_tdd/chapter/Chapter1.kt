@@ -3,8 +3,9 @@ package com.example.study_tdd.chapter
 import android.os.Bundle
 import com.example.study_tdd.base.BaseActivity
 import com.example.study_tdd.R
+import com.example.study_tdd.databinding.ActivityChapter1Binding
 
-class Chapter1 : BaseActivity(R.layout.activity_chapter1) {
+class Chapter1 : BaseActivity<ActivityChapter1Binding>(R.layout.activity_chapter1) {
 
     //1부에서는 TDD 의 리듬을 보도록 하 것.
 
