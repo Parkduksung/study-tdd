@@ -1,5 +1,6 @@
 package com.example.study_tdd.presenter
 
+import android.Manifest
 import androidx.core.content.PermissionChecker
 
 class FilePermission(
@@ -7,14 +8,18 @@ class FilePermission(
     private val activityHandler: ActivityHandler
 ) : AndroidPermission {
 
-    companion object{
-        private const val FILE_PERMISSION = ""
-        private const val REQUEST_CODE: Int = 0
+    companion object {
+        private val FILE_PERMISSION = arrayOf(
+            Manifest.permission.CAMERA,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_EXTERNAL_STORAGE
+        )
+        private const val REQUEST_CODE: Int = 10
     }
 
     override suspend fun request(): Boolean {
         val permissionResult = checkSelfPermission.check()
-        if(permissionResult == PermissionChecker.PERMISSION_GRANTED){
+        if (permissionResult == PermissionChecker.PERMISSION_GRANTED) {
             return true
         }
 

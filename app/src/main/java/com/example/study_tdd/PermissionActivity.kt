@@ -5,27 +5,63 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.content.PermissionChecker
 import com.example.study_tdd.base.BaseActivity
 import com.example.study_tdd.databinding.ActivityPermissionBinding
 import com.example.study_tdd.ext.showToast
+import com.example.study_tdd.presenter.ActivityHandler
+import com.example.study_tdd.presenter.CheckSelfPermission
+import com.example.study_tdd.presenter.FilePermission
+import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.runBlocking
 
 class PermissionActivity : BaseActivity<ActivityPermissionBinding>(R.layout.activity_permission) {
+
+    private val filePermission: FilePermission by lazy {
+        FilePermission(
+            checkSelfPermission,
+            activityHandler
+        )
+    }
+    private lateinit var checkSelfPermission: CheckSelfPermission
+    private lateinit var activityHandler: ActivityHandler
+
+    private var resultRequestPermission: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding.btnPermissionCheck.setOnClickListener {
-            showToast("눌림")
-
-            if (checkPermissionGranted()) {
-
-            } else {
-                ActivityCompat.requestPermissions(
-                    this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS
-                )
+            runBlocking {
+                if (filePermission.request()) {
+                    showToast("권환 체크 이미 ok")
+                } else {
+                    ActivityCompat.requestPermissions(
+                        this@PermissionActivity, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS
+                    )
+                }
             }
-
         }
+
+        checkSelfPermission = object : CheckSelfPermission {
+            override fun check(): Int {
+                return if (checkPermissionGranted()) {
+                    PermissionChecker.PERMISSION_GRANTED
+                } else {
+                    PermissionChecker.PERMISSION_DENIED
+                }
+            }
+        }
+
+        activityHandler = object : ActivityHandler {
+            override fun requestPermission(
+                permissionName: Array<String>,
+                requestCode: Int
+            ): CompletableDeferred<Boolean> {
+                return CompletableDeferred(resultRequestPermission)
+            }
+        }
+
 
     }
 
@@ -41,20 +77,18 @@ class PermissionActivity : BaseActivity<ActivityPermissionBinding>(R.layout.acti
         grantResults: IntArray
     ) {
         if (requestCode == REQUEST_CODE_PERMISSIONS) {
+            resultRequestPermission = checkPermissionGranted()
             if (checkPermissionGranted()) {
-
+                showToast("권환 체크 ok")
             } else {
-                showToast("실패")
-                finish()
+                showToast("권환 체크 no")
             }
         }
     }
 
-
     companion object {
         private const val REQUEST_CODE_PERMISSIONS = 10
         private val REQUIRED_PERMISSIONS = arrayOf(
-            Manifest.permission.CAMERA,
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
             Manifest.permission.READ_EXTERNAL_STORAGE
         )
