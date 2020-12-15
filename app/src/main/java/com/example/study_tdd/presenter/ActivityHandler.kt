@@ -1,4 +1,4 @@
-package com.rsupport.tdd.presenter
+package com.example.study_tdd.presenter
 
 import kotlinx.coroutines.CompletableDeferred
 

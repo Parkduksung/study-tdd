@@ -1,6 +1,6 @@
-package com.rsupport.tdd.permission.domain
+package com.example.study_tdd.permission.domain
 
-import com.rsupport.tdd.permission.AndroidPermission
+import com.example.study_tdd.permission.AndroidPermission
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

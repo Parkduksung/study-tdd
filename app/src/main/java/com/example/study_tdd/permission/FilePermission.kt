@@ -1,8 +1,8 @@
-package com.rsupport.tdd.permission
+package com.example.study_tdd.permission
 
 import android.Manifest
 import androidx.core.content.PermissionChecker
-import com.rsupport.tdd.presenter.ActivityHandler
+import com.example.study_tdd.presenter.ActivityHandler
 
 class FilePermission(
     private val checkSelfPermission: CheckSelfPermission,

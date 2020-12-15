@@ -5,10 +5,10 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.rsupport.tdd.permission.CheckSelfPermission
-import com.rsupport.tdd.permission.FilePermission
-import com.rsupport.tdd.permission.domain.PermissionDomain
-import com.rsupport.tdd.presenter.ActivityHandlerImpl
+import com.example.study_tdd.permission.CheckSelfPermission
+import com.example.study_tdd.permission.FilePermission
+import com.example.study_tdd.permission.domain.PermissionDomain
+import com.example.study_tdd.presenter.ActivityHandlerImpl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
