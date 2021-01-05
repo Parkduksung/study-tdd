@@ -1,8 +1,8 @@
-package com.example.study_tdd.file.viewmodel
+package com.example.study_tdd.conpany.file.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.study_tdd.permission.domain.PermissionDomain
+import com.example.study_tdd.conpany.permission.domain.PermissionDomain
 import kotlinx.coroutines.launch
 
 class PermissionViewModel(private val permissionCallback: PermissionCallback, private val permissionDomain : PermissionDomain) : ViewModel() {

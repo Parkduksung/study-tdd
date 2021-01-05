@@ -1,9 +1,9 @@
-package com.example.study_tdd.permission
+package com.example.study_tdd.conpany.permission
 
 import androidx.core.content.PermissionChecker
-import com.example.study_tdd.presenter.ActivityHandler
-import com.example.study_tdd.presenter.CheckSelfPermission
-import com.example.study_tdd.presenter.FilePermission
+import com.example.study_tdd.conpany.presenter.ActivityHandler
+import com.example.study_tdd.conpany.presenter.CheckSelfPermission
+import com.example.study_tdd.conpany.presenter.FilePermission
 import io.mockk.every
 import io.mockk.mockk
 import junit.framework.Assert.assertFalse

@@ -1,10 +1,9 @@
 package com.example.study_tdd
 
-import com.example.study_tdd.chapter.Dollars
-import com.example.study_tdd.chapter.Franc
+import com.example.study_tdd.kentbeck.chapter.Dollars
+import com.example.study_tdd.kentbeck.chapter.Franc
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertTrue
-import org.junit.Assert
 import org.junit.Test
 
 class Chapter1 {

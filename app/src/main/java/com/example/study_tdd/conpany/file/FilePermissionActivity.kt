@@ -1,14 +1,14 @@
-package com.example.study_tdd.file
+package com.example.study_tdd.conpany.file
 
 import android.app.Activity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.study_tdd.permission.CheckSelfPermission
-import com.example.study_tdd.permission.FilePermission
-import com.example.study_tdd.permission.domain.PermissionDomain
-import com.example.study_tdd.presenter.ActivityHandlerImpl
+import com.example.study_tdd.conpany.permission.CheckSelfPermission
+import com.example.study_tdd.conpany.permission.FilePermission
+import com.example.study_tdd.conpany.permission.domain.PermissionDomain
+import com.example.study_tdd.conpany.presenter.ActivityHandlerImpl
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job

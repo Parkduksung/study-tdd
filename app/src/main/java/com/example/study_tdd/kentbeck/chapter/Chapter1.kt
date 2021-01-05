@@ -1,4 +1,4 @@
-package com.example.study_tdd.chapter
+package com.example.study_tdd.kentbeck.chapter
 
 import android.os.Bundle
 import com.example.study_tdd.base.BaseActivity

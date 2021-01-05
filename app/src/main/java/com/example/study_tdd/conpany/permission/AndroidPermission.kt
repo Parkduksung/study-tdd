@@ -1,4 +1,4 @@
-package com.example.study_tdd.permission
+package com.example.study_tdd.conpany.permission
 
 interface AndroidPermission {
     suspend fun request(): Boolean

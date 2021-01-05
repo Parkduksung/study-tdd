@@ -1,4 +1,4 @@
-package com.example.study_tdd.presenter
+package com.example.study_tdd.conpany.presenter
 
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity

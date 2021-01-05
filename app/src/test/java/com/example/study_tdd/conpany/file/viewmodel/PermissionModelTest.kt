@@ -1,6 +1,6 @@
-package com.example.study_tdd.file.viewmodel
+package com.example.study_tdd.conpany.file.viewmodel
 
-import com.example.study_tdd.permission.domain.PermissionDomain
+import com.example.study_tdd.conpany.permission.domain.PermissionDomain
 import io.mockk.coEvery
 import io.mockk.mockk
 import io.mockk.verify
