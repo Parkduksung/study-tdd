@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.study_tdd.R
 import com.example.study_tdd.conpany.permission.CheckSelfPermission
 import com.example.study_tdd.conpany.permission.FilePermission
 import com.example.study_tdd.conpany.permission.domain.PermissionDomain
@@ -22,21 +23,21 @@ class FilePermissionActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_main)
-
-        findViewById<View>(R.id.buttonGetFilePermission).setOnClickListener {
-            val filePermission = FilePermission(
-                checkSelfPermission = CheckSelfPermissionImpl(this),
-                activityHandler = ActivityHandlerImpl(this)
-            )
-
-            this.domain = PermissionDomain(filePermission)
-
-            this.job = CoroutineScope(Dispatchers.Main).launch {
-                val result = domain.request();
-                Toast.makeText(this@FilePermissionActivity, "RESULT: $result", Toast.LENGTH_SHORT).show()
-            }
-        }
+//        setContentView(R.layout.activity_main)
+//
+//        findViewById<View>(R.id.buttonGetFilePermission).setOnClickListener {
+//            val filePermission = FilePermission(
+//                checkSelfPermission = CheckSelfPermissionImpl(this),
+//                activityHandler = ActivityHandlerImpl(this)
+//            )
+//
+//            this.domain = PermissionDomain(filePermission)
+//
+//            this.job = CoroutineScope(Dispatchers.Main).launch {
+//                val result = domain.request();
+//                Toast.makeText(this@FilePermissionActivity, "RESULT: $result", Toast.LENGTH_SHORT).show()
+//            }
+//        }
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
