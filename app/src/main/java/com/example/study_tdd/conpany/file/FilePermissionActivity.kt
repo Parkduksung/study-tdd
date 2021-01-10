@@ -1,59 +1,56 @@
 package com.example.study_tdd.conpany.file
 
-import android.app.Activity
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
-import android.view.View
-import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import com.example.study_tdd.R
-import com.example.study_tdd.conpany.permission.CheckSelfPermission
-import com.example.study_tdd.conpany.permission.FilePermission
-import com.example.study_tdd.conpany.permission.domain.PermissionDomain
-import com.example.study_tdd.conpany.presenter.ActivityHandlerImpl
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import com.example.study_tdd.base.BaseActivity
+import com.example.study_tdd.databinding.ActivityPermissionBinding
+import com.example.study_tdd.ext.showToast
 
-class FilePermissionActivity : AppCompatActivity() {
+class FilePermissionActivity :
+    BaseActivity<ActivityPermissionBinding>(R.layout.activity_permission) {
 
-    private lateinit var domain: PermissionDomain
-    private lateinit var job: Job
+    companion object {
+        private const val REQUEST_CODE_PERMISSIONS = 10
+        private val REQUIRED_PERMISSIONS =
+            arrayOf(Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-//        setContentView(R.layout.activity_main)
-//
-//        findViewById<View>(R.id.buttonGetFilePermission).setOnClickListener {
-//            val filePermission = FilePermission(
-//                checkSelfPermission = CheckSelfPermissionImpl(this),
-//                activityHandler = ActivityHandlerImpl(this)
-//            )
-//
-//            this.domain = PermissionDomain(filePermission)
-//
-//            this.job = CoroutineScope(Dispatchers.Main).launch {
-//                val result = domain.request();
-//                Toast.makeText(this@FilePermissionActivity, "RESULT: $result", Toast.LENGTH_SHORT).show()
-//            }
-//        }
+        if (allPermissionsGranted()) {
+            showToast("ok")
+        } else {
+            ActivityCompat.requestPermissions(
+                this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS
+            )
+        }
+
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        domain.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
+        ContextCompat.checkSelfPermission(
+            baseContext, it
+        ) == PackageManager.PERMISSION_GRANTED
     }
 
-    override fun onDestroy() {
-        job.cancel()
-        super.onDestroy()
-    }
 
-    class CheckSelfPermissionImpl(private val activity: Activity) : CheckSelfPermission {
-        override fun check(permissionName: String): Int {
-            return activity.checkSelfPermission(permissionName)
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        if (requestCode == REQUEST_CODE_PERMISSIONS) {
+            if (allPermissionsGranted()) {
+                showToast("ok")
+            } else {
+                showToast("no")
+                finish()
+            }
         }
     }
-
 }
