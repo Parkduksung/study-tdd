@@ -1,4 +1,4 @@
-package com.example.study_tdd.conpany.file
+package com.example.study_tdd.teammeeting.presenter
 
 import android.Manifest
 import android.content.pm.PackageManager
@@ -29,7 +29,6 @@ class FilePermissionActivity :
                 this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS
             )
         }
-
     }
 
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
