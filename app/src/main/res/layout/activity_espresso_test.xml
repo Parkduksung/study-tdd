@@ -4,6 +4,9 @@
 
     <data>
 
+        <variable
+            name="viewModel"
+            type="com.example.study_tdd.espressotest.EspressoViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -22,6 +25,7 @@
                     android:id="@+id/input1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:text="@={viewModel.input1}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias=".0"
@@ -34,6 +38,7 @@
                     android:id="@+id/output1"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
+                    android:text="@={viewModel.input1}"
                     app:layout_constraintBottom_toBottomOf="@id/input1"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/input1"
@@ -43,6 +48,7 @@
                     android:id="@+id/input2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:text="@={viewModel.input2}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias=".0"
@@ -55,6 +61,7 @@
                     android:id="@+id/output2"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
+                    android:text="@={viewModel.input2}"
                     app:layout_constraintBottom_toBottomOf="@id/input2"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/input2"
@@ -64,6 +71,7 @@
                     android:id="@+id/input3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:text="@={viewModel.input3}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias=".0"
@@ -76,6 +84,7 @@
                     android:id="@+id/output3"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
+                    android:text="@={viewModel.input3}"
                     app:layout_constraintBottom_toBottomOf="@id/input3"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/input3"
@@ -85,6 +94,7 @@
                     android:id="@+id/input4"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:text="@={viewModel.input4}"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias=".0"
@@ -97,6 +107,7 @@
                     android:id="@+id/output4"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
+                    android:text="@={viewModel.input4}"
                     app:layout_constraintBottom_toBottomOf="@id/input4"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/input4"
@@ -168,10 +179,10 @@
 
 
                 <Button
-                    android:id="@+id/start_main_button"
+                    android:id="@+id/start_ui_test_button"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="start MainActivity"
+                    android:text="start UiTestAcitivy"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias=".0"
@@ -188,14 +199,14 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias=".0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/start_main_button"
+                    app:layout_constraintTop_toBottomOf="@id/start_ui_test_button"
                     app:layout_constraintVertical_bias=".0" />
 
                 <Button
-                    android:id="@+id/start_toast_button"
+                    android:id="@+id/start_dialog_and_next_activity"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="start toast"
+                    android:text="start dialog and next activity"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias=".0"
@@ -212,7 +223,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias=".0"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/start_toast_button"
+                    app:layout_constraintTop_toBottomOf="@id/start_dialog_and_next_activity"
                     app:layout_constraintVertical_bias=".0" />
 
                 <Button
