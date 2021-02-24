@@ -8,10 +8,10 @@ import androidx.test.espresso.assertion.ViewAssertions.matches
 import androidx.test.espresso.matcher.ViewMatchers.*
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.study_tdd.R
+import com.example.study_tdd.espressotest.basic.EspressoTestActivity
 import org.hamcrest.Matchers.*
 import org.junit.Test
 import org.junit.runner.RunWith
-import java.lang.Thread.sleep
 
 @RunWith(AndroidJUnit4::class)
 class EspressoTestActivityTest {
@@ -35,8 +35,6 @@ class EspressoTestActivityTest {
         ActivityScenario.launch(EspressoTestActivity::class.java)
 
         onView(withId(R.id.input2)).perform(typeText("bbbb"))
-
-
 
         onView(withId(R.id.output2)).check(matches(withText("bbbb")))
 

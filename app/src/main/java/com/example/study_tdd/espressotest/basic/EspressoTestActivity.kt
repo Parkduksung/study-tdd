@@ -1,15 +1,12 @@
-package com.example.study_tdd.espressotest
+package com.example.study_tdd.espressotest.basic
 
 import android.app.AlertDialog
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.example.study_tdd.R
 import com.example.study_tdd.base.BaseActivity
 import com.example.study_tdd.databinding.ActivityEspressoTestBinding
-import com.example.study_tdd.ext.showToast
 import com.example.study_tdd.ui.UiBasicTestActivity
 
 class EspressoTestActivity :

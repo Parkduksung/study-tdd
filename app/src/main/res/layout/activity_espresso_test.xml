@@ -6,7 +6,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.study_tdd.espressotest.EspressoViewModel" />
+            type="com.example.study_tdd.espressotest.basic.EspressoViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

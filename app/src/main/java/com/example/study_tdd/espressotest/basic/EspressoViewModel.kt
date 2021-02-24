@@ -1,4 +1,4 @@
-package com.example.study_tdd.espressotest
+package com.example.study_tdd.espressotest.basic
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
