@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".espressotest.basic.EspressoTestActivity">
+        <activity android:name=".espressotest.recyclerview.EspressoRecyclerVIewActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
