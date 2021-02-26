@@ -22,15 +22,11 @@ class EspressoRecyclerVIewActivity :
         }
     }
 
-
     companion object {
-
-        private val mockEspressoObject = listOf(
-            EspressoRecyclerModel(name = "박덕성", age = 30, job = "programmer", career = 1),
-            EspressoRecyclerModel(name = "박덕", age = 29, job = "backend", career = 2),
-            EspressoRecyclerModel(name = "박", age = 28, job = "android", career = 3),
-            EspressoRecyclerModel(name = "덕성", age = 31, job = "ios", career = 4),
-            EspressoRecyclerModel(name = "박성", age = 32, job = "win", career = 5)
-        )
+        private val mockEspressoObject = mutableListOf<EspressoRecyclerModel>().apply {
+            for (i in 1 until 50) {
+                add(EspressoRecyclerModel(name = "박덕성", age = 30, job = "programmer", career = i))
+            }
+        }
     }
 }
