@@ -5,6 +5,7 @@ import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.assertion.ViewAssertions
 import androidx.test.espresso.matcher.ViewMatchers
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.example.study_tdd.R
 import org.junit.Test
 import org.junit.runner.RunWith
 
@@ -16,6 +17,19 @@ class EspressoRecyclerVIewActivityTest {
         private const val LAST_ITEM = "박덕성 : 30 : programmer : 50"
 
     }
+
+    @Test
+    fun should_show_recyclerview_when_init() {
+
+        ActivityScenario.launch(EspressoRecyclerVIewActivity::class.java)
+
+        onView(ViewMatchers.withId(R.id.espresso_recycler)).check(
+            ViewAssertions.matches(
+                ViewMatchers.isDisplayed()
+            )
+        )
+    }
+
 
     @Test
     fun should_not_show_last_item_when_not_scrolled_down() {
