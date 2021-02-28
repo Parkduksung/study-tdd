@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.study_tdd.R
+import com.example.study_tdd.espressotest.recyclerview.adapter.EspressoItemListener
 import com.example.study_tdd.espressotest.recyclerview.model.EspressoRecyclerModel
 
 class EspressoRecyclerViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
@@ -17,11 +18,18 @@ class EspressoRecyclerViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(
     private val job = itemView.findViewById<TextView>(R.id.job)
     private val career = itemView.findViewById<TextView>(R.id.career)
 
-    fun item(espressoRecyclerModel: EspressoRecyclerModel) {
+    fun item(
+        espressoRecyclerModel: EspressoRecyclerModel,
+        espressoItemListener: EspressoItemListener
+    ) {
         name.text = espressoRecyclerModel.name
         age.text = espressoRecyclerModel.age.toString()
         job.text = espressoRecyclerModel.job
         career.text = espressoRecyclerModel.career.toString()
+
+        itemView.setOnClickListener {
+            espressoItemListener.onItemClick(item = espressoRecyclerModel)
+        }
     }
 
 }
