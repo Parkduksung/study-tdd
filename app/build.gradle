@@ -15,7 +15,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-    buildFeatures{
+    buildFeatures {
         dataBinding true
     }
 
@@ -44,6 +44,9 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.1.0'
     androidTestImplementation 'androidx.test:rules:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+
+    //add. because of recyclerview test
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.3.0'
 
     //recyclerview
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
