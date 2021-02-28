@@ -1,6 +1,7 @@
 package com.example.study_tdd.espressotest.recyclerview
 
 import androidx.test.core.app.ActivityScenario
+import androidx.test.espresso.Espresso
 import androidx.test.espresso.Espresso.onView
 import androidx.test.espresso.action.ViewActions
 import androidx.test.espresso.assertion.ViewAssertions
@@ -43,6 +44,19 @@ class EspressoRecyclerVIewActivityTest {
     }
 
     @Test
+    fun should_show_last_position_when_launch() {
+
+        ActivityScenario.launch(EspressoRecyclerVIewActivity::class.java)
+
+        //원하는 Item Position 을 집어넣으면 거기까지 스크롤된다.
+        Espresso.onView(ViewMatchers.withId(R.id.espresso_recycler)).perform(
+            RecyclerViewActions.scrollToPosition<EspressoRecyclerViewHolder>(
+                LAST_ITEM_POSITION
+            )
+        )
+    }
+
+    @Test
     fun should_show_toast_message_when_item_click() {
         ActivityScenario.launch(EspressoRecyclerVIewActivity::class.java)
 
@@ -54,5 +68,6 @@ class EspressoRecyclerVIewActivityTest {
             )
         )
     }
+
 
 }
