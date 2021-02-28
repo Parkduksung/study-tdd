@@ -32,7 +32,7 @@ class EspressoRecyclerVIewActivity :
 
     companion object {
         private val mockEspressoObject = mutableListOf<EspressoRecyclerModel>().apply {
-            for (i in 1 until 50) {
+            for (i in 1 .. 50) {
                 add(EspressoRecyclerModel(name = "박덕성", age = 30, job = "programmer", career = i))
             }
         }
