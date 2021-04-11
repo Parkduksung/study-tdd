@@ -19,4 +19,28 @@ class NetworkUtilTest {
 
     }
 
+
+    @Test
+    fun `wideVineId 값이 정상적으로 획득되었을때, 값의 길이가 0 이상이다`() {
+
+        val wideVineId = WideVineId()
+
+        if (wideVineId.getAddress()) {
+            assertTrue(wideVineId.address.isNotEmpty())
+        }
+    }
+
+    @Test
+    fun `wideVineId 값이 정상적으로 획득되지 않았을때, 값의 길이가 0이다`() {
+
+        val wideVineId = WideVineId()
+
+        if (!wideVineId.getAddress()) {
+            assertEquals(wideVineId.address.length, 0)
+        }
+    }
+
+
+
+
 }
