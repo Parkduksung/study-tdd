@@ -24,18 +24,6 @@ import java.util.regex.Pattern;
  */
 public class NetworkUtil {
 
-
-    /**
-     * MAC 주소 조회. Android M 부터 WifiManager 를 통한 MAC 주소 조회 불가.
-     * 대체방법으로 Network interface 목록에서 wlan0 이름을 가진 장치의 MAC 을 조회하는것으로 처리되고 있었으나,
-     * 가져오지 못하는 경우(단말)이 있어, API가 지원되지 않는 경우는 MAC 주소를 임의 생성한 값으로 대체하는것으로 처리할것.
-     * 조회되지 않는 경우에 API에서의 반환값은 02:00:00:00:00:00 이다.
-     * <p>
-     * 본 메소드에서는 구분자를 제외하고 12자리로 반환한다.
-     *
-     * @param context
-     * @return
-     */
     public static String getMacAddress(Context context) {
         if (VERSION.SDK_INT >= VERSION_CODES.M) {
             //WifiManager를 통한 MAC 조회 불가

@@ -21,11 +21,9 @@ class SSAId(private val context: Context) : AlternativeMacAddress {
                 _address = getSSAId
                 true
             } else {
-                _address = ""
                 false
             }
         } catch (e: Exception) {
-            _address = ""
             false
         }
     }
