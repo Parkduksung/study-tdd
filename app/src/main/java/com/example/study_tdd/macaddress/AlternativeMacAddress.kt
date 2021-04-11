@@ -1,4 +1,10 @@
 package com.example.study_tdd.macaddress
 
-class AlternativeMacAddress {
+
+interface AlternativeMacAddress {
+
+    val address : String
+
+    fun getAddress(): Boolean
 }
+
