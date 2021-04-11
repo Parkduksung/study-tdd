@@ -1,13 +1,18 @@
 package com.example.study_tdd.macaddress
 
+import android.content.Context
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertTrue
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.Mock
 import org.mockito.junit.MockitoJUnitRunner
 
 @RunWith(MockitoJUnitRunner::class)
 class NetworkUtilTest {
+
+    @Mock
+    lateinit var context: Context
 
 
     @Test
@@ -23,7 +28,7 @@ class NetworkUtilTest {
 
 
     @Test
-    fun `wideVineId 값이 정상적으로 획득되었을때, 값의 길이가 0 이상이다`() {
+    fun `wideVineId 값이 정상적으로 획득되었을때, 값의 길이가 0 보다 길어야한다`() {
 
         val wideVineId = WideVineId()
 
@@ -42,7 +47,24 @@ class NetworkUtilTest {
         }
     }
 
+    @Test
+    fun `SSAId 값이 정상적으로 획득되었을때, 값의 길이가 0한 보다 길어야한다`() {
 
+        val ssaId = SSAId(context)
 
+        if (ssaId.getAddress()) {
+            assertTrue(ssaId.address.isNotEmpty())
+        }
+    }
+
+    @Test
+    fun `SSAId 값이 정상적으로 획득되지 않을때, 값의 길이가 0이다`() {
+
+        val ssaId = SSAId(context)
+
+        if (!ssaId.getAddress()) {
+            assertEquals(ssaId.address.length, 0)
+        }
+    }
 
 }
