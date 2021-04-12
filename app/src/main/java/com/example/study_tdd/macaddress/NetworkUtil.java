@@ -9,6 +9,8 @@ import android.os.Build.VERSION;
 import android.os.Build.VERSION_CODES;
 import android.provider.Settings;
 
+import org.koin.java.KoinJavaComponent;
+
 import java.net.NetworkInterface;
 import java.text.SimpleDateFormat;
 import java.util.Base64;
@@ -19,10 +21,14 @@ import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import kotlin.Lazy;
+
 /**
  * Created by hyosang on 2016. 7. 28..
  */
 public class NetworkUtil {
+
+    private Lazy<AlternativeMacAddress> alternativeMacAddressLazy = KoinJavaComponent.inject(AlternativeMacAddress.class);
 
     public static String getMacAddress(Context context) {
         if (VERSION.SDK_INT >= VERSION_CODES.M) {
@@ -101,12 +107,11 @@ public class NetworkUtil {
      * 본 메소드에서는 구분자를 제외하고 12자리로 반환한다.
      * *
      *
-     * @param context
      * @return
      */
-//    public static String getAlternativeMacAddress(Context context) {
-//        return new AlternativeMacAddress().getAlternativeMacAddress(context);
-//    }
+    public static String getAlternativeMacAddress() {
+        return KoinJavaComponent.inject(AlternativeMacAddress.class).getValue().getAlternativeMacAddress();
+    }
 
 }
 
