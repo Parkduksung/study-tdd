@@ -104,10 +104,9 @@ public class NetworkUtil {
      * @param context
      * @return
      */
-
-    public static String getAlternativeMacAddress(Context context) {
-        return new AlternativeMacAddress().getAlternativeMacAddress(context);
-    }
+//    public static String getAlternativeMacAddress(Context context) {
+//        return new AlternativeMacAddress().getAlternativeMacAddress(context);
+//    }
 
 }
 

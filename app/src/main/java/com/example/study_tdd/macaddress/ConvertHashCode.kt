@@ -4,30 +4,18 @@ import java.lang.StringBuilder
 import kotlin.math.abs
 
 class ConvertHashCode(private val notConvertAddress: String) : Address {
-
-    private var convertAddress = ""
-
-    override val address: String
-        get() = convertAddress
-
-    override fun getAddress(): Boolean {
+    override fun getAddress(): String {
         return if (notConvertAddress != "") {
-            convertAddress = abs(notConvertAddress.hashCode()).toString()
-            true
+            abs(notConvertAddress.hashCode()).toString()
         } else {
-            false
+            ""
         }
     }
 }
 
 class TransformDigitAddress(private val notTransformAddress: String) : Address {
 
-    private var transformAddress = ""
-
-    override val address: String
-        get() = transformAddress
-
-    override fun getAddress(): Boolean {
+    override fun getAddress(): String {
 
         val transformAddressBuilder =
             StringBuilder(notTransformAddress)
@@ -35,18 +23,18 @@ class TransformDigitAddress(private val notTransformAddress: String) : Address {
         val addArray = arrayOf("4", "4", "3", "0")
 
         // 12자리 숫자를 만들어 주기 위한 로직.
-        transformAddress = if (transformAddressBuilder.length < 12) {
+
+        return if (transformAddressBuilder.length < 12) {
             val convertHashCodeLength = transformAddressBuilder.length
             // 12자리 숫자가 아닌경우 빈공간에 순차적으로 배열의 값을 추가하여 12자리를 만들어준다.
             for (i in convertHashCodeLength..11) {
-                transformAddressBuilder.append(addArray[(12 - i) % 4])
+                transformAddressBuilder.append(addArray[(11 - i) % 4])
             }
             transformAddressBuilder.toString()
         } else {
             // 12자리 숫자 초과인 경우 12자리까지 자른다.
-            transformAddressBuilder.substring(0, 11)
+            transformAddressBuilder.substring(0, 12)
         }
-
-        return transformAddress.length == 12
     }
 }
+

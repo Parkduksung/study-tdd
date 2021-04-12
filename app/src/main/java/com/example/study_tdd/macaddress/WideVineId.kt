@@ -7,13 +7,7 @@ import java.util.*
 
 
 class WideVineId : Address {
-
-    private var _address = ""
-
-    override val address: String
-        get() = _address
-
-    override fun getAddress(): Boolean {
+    override fun getAddress(): String {
         return try {
             val mediaDrm = MediaDrm(UUID(-0x121074568629b532L, -0x5c37d8232ae2de13L))
             val wideVineId = mediaDrm.getPropertyByteArray(MediaDrm.PROPERTY_DEVICE_UNIQUE_ID)
@@ -24,19 +18,12 @@ class WideVineId : Address {
             }
 
             if (toEncoder != "") {
-                _address = toEncoder
-                true
+                toEncoder
             } else {
-                _address = ""
-                false
+                ""
             }
         } catch (e: Exception) {
-            _address = ""
-            false
+            ""
         }
-    }
-
-    fun hasAddress1() : Boolean {
-        return address!=""
     }
 }
