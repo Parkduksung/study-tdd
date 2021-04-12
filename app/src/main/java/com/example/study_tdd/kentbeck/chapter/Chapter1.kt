@@ -4,6 +4,7 @@ import android.os.Bundle
 import com.example.study_tdd.base.BaseActivity
 import com.example.study_tdd.R
 import com.example.study_tdd.databinding.ActivityChapter1Binding
+import com.example.study_tdd.macaddress.NetworkUtil
 
 class Chapter1 : BaseActivity<ActivityChapter1Binding>(R.layout.activity_chapter1) {
 
@@ -17,6 +18,8 @@ class Chapter1 : BaseActivity<ActivityChapter1Binding>(R.layout.activity_chapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        binding.tvMacAddress.text =  NetworkUtil.getAlternativeMacAddress()
 
     }
 
