@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.provider.Settings
 
-class SSAId(private val context: Context) : AlternativeMacAddress {
+class SSAId(private val context: Context) : Address {
 
     private var _address = ""
 
@@ -17,7 +17,7 @@ class SSAId(private val context: Context) : AlternativeMacAddress {
             val getSSAId =
                 Settings.Secure.getString(context.contentResolver, Settings.Secure.ANDROID_ID)
 
-            if (getSSAId != null) {
+            if (getSSAId != null && getSSAId != "") {
                 _address = getSSAId
                 true
             } else {

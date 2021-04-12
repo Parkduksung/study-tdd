@@ -5,7 +5,7 @@ import android.os.Build
 import android.util.Base64
 import java.util.*
 
-class WideVineId : AlternativeMacAddress {
+class WideVineId : Address {
 
     private var _address = ""
 
@@ -21,8 +21,13 @@ class WideVineId : AlternativeMacAddress {
             } else {
                 Base64.encodeToString(wideVineId, Base64.DEFAULT).trim()
             }
-            _address = toEncoder
-            true
+
+            if (toEncoder != "") {
+                _address = toEncoder
+                true
+            } else {
+                false
+            }
         } catch (e: Exception) {
             false
         }

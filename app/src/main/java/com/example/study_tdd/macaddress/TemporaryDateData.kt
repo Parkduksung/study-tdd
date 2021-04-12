@@ -4,7 +4,7 @@ import android.annotation.SuppressLint
 import java.text.SimpleDateFormat
 import java.util.*
 
-class TemporaryDateData : AlternativeMacAddress {
+class TemporaryDateData : Address {
 
     private var _address = ""
 
