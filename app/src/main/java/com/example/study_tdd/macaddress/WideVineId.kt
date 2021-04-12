@@ -5,6 +5,7 @@ import android.os.Build
 import android.util.Base64
 import java.util.*
 
+
 class WideVineId : Address {
 
     private var _address = ""
@@ -26,10 +27,16 @@ class WideVineId : Address {
                 _address = toEncoder
                 true
             } else {
+                _address = ""
                 false
             }
         } catch (e: Exception) {
+            _address = ""
             false
         }
+    }
+
+    fun hasAddress1() : Boolean {
+        return address!=""
     }
 }

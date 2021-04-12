@@ -106,70 +106,8 @@ public class NetworkUtil {
      */
 
     public static String getAlternativeMacAddress(Context context) {
-        String wideVineId = getWideVineId();
-        String ssaId = getSSAId(context);
-
-        String combineWideVineAndSSAId = wideVineId + ssaId;
-
-        if (combineWideVineAndSSAId.isEmpty()) {
-            return getTemporaryDateData();
-        } else {
-            return convertHashCode(combineWideVineAndSSAId);
-        }
+        return new AlternativeMacAddress().getAlternativeMacAddress(context);
     }
 
-    @SuppressLint("HardwareIds")
-    private static String getSSAId(Context context) {
-        try {
-            String getSSAId = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
-            return (getSSAId == null) ? "" : getSSAId;
-        } catch (Exception e) {
-            return "";
-        }
-    }
-
-    private static String getWideVineId() {
-        try {
-            MediaDrm mediaDrm = new MediaDrm(new UUID(-0x121074568629b532L, -0x5c37d8232ae2de13L));
-            byte[] wideVineId = mediaDrm.getPropertyByteArray(MediaDrm.PROPERTY_DEVICE_UNIQUE_ID);
-
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                return Base64.getEncoder().encodeToString(wideVineId).trim();
-            } else {
-                return android.util.Base64.encodeToString(wideVineId, android.util.Base64.DEFAULT).trim();
-            }
-        } catch (Exception e) {
-            return "";
-        }
-    }
-
-    private static String convertHashCode(String combineWideVineAndSSAId) {
-
-        StringBuilder convertHashCode = new StringBuilder(String.valueOf(Math.abs(combineWideVineAndSSAId.hashCode())));
-
-        String[] addArray = new String[]{"4", "4", "3", "0"};
-
-        // 12자리 숫자를 만들어 주기 위한 로직.
-        if (convertHashCode.length() < 12) {
-
-            int convertHashCodeLength = convertHashCode.length();
-            // 12자리 숫자가 아닌경우 빈공간에 순차적으로 배열의 값을 추가하여 12자리를 만들어준다.
-            for (int i = convertHashCodeLength; i < 12; i++) {
-                convertHashCode.append(addArray[(12 - i) % 4]);
-            }
-            return convertHashCode.toString();
-
-        } else {
-
-            // 12자리 숫자 초과인 경우 12자리까지 자른다.
-            return convertHashCode.substring(0, 11);
-        }
-    }
-
-    // wideVineId, SSAId 값이 모두 "" 인 경우, 년월일시분초 임시데이터를 만들어 저장 (IOS 방식과 동일)
-    @SuppressLint("SimpleDateFormat")
-    private static String getTemporaryDateData() {
-        return new SimpleDateFormat("yyMMddHHmmss").format(new Date());
-    }
 }
 

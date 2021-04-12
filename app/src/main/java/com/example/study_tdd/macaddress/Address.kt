@@ -8,3 +8,4 @@ interface Address {
     fun getAddress(): Boolean
 }
 
+//stub

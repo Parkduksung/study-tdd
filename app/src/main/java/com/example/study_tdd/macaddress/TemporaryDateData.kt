@@ -13,7 +13,7 @@ class TemporaryDateData : Address {
 
     @SuppressLint("SimpleDateFormat")
     override fun getAddress(): Boolean {
-        _address = SimpleDateFormat("yyMMddHHmmss").format(Date());
+        _address = SimpleDateFormat("yyMMddHHmmss").format(Date())
         return true
     }
 }
