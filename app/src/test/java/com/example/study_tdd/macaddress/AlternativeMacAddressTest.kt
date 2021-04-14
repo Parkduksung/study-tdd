@@ -16,10 +16,12 @@ class AlternativeMacAddressTest {
 
     companion object {
         private const val DUMMY_DATA = "125123"
+        private const val TWELVE_DIGIT = 12
+        private const val EMPTY = ""
     }
 
     @Mock
-    lateinit var addressProvider: AddressProvider
+    lateinit var context: Context
 
     @Mock
     lateinit var ssaId: SSAId
@@ -28,24 +30,36 @@ class AlternativeMacAddressTest {
     lateinit var wideVineId: WideVineId
 
     @Mock
-    lateinit var context: Context
-
+    lateinit var addressProvider: AddressProvider
 
     @Before
     fun setup() {
-        addressProvider = Mockito.mock(AddressProvider::class.java)
         ssaId = Mockito.mock(SSAId::class.java)
         wideVineId = Mockito.mock(WideVineId::class.java)
+        addressProvider = Mockito.mock(AddressProvider::class.java)
     }
+
+    @Test
+    fun `ssaId, wideVineId 값이 모두 "" 이 아닌 경우, TransformDigitAddress 를 반환한다`() {
+
+        Mockito.`when`(ssaId.getAddress()).thenReturn("asdv1wdweh")
+        Mockito.`when`(wideVineId.getAddress()).thenReturn("asdoij1[o2i")
+
+        addressProvider = AddressProvider(ssaId, wideVineId)
+
+        assertTrue(addressProvider.create() is TransformDigitAddress)
+    }
+
 
     @Test
     fun `대체맥어드레스 일시적인 데이터 값이 반환될때, 항상 값이 존재해야 한다`() {
 
         Mockito.`when`(addressProvider.create()).thenReturn(TemporaryDateData())
 
-        val alternativeMacAddress = AlternativeMacAddress(addressProvider)
+        val getAlternativeMacAddress = AlternativeMacAddress(addressProvider).getAlternativeMacAddress()
 
-        assertTrue(alternativeMacAddress.getAlternativeMacAddress().isNotEmpty())
+        assertTrue(getAlternativeMacAddress.isNotEmpty())
+
     }
 
 
@@ -54,9 +68,9 @@ class AlternativeMacAddressTest {
 
         Mockito.`when`(addressProvider.create()).thenReturn(TemporaryDateData())
 
-        val alternativeMacAddress = AlternativeMacAddress(addressProvider)
+        val getAlternativeMacAddress = AlternativeMacAddress(addressProvider).getAlternativeMacAddress()
 
-        assertTrue(alternativeMacAddress.getAlternativeMacAddress().length == 12)
+        assertTrue(getAlternativeMacAddress.length == TWELVE_DIGIT)
     }
 
     @Test
@@ -64,103 +78,60 @@ class AlternativeMacAddressTest {
 
         Mockito.`when`(addressProvider.create()).thenReturn(TransformDigitAddress(DUMMY_DATA))
 
-        val alternativeMacAddress = AlternativeMacAddress(addressProvider)
+        val getAlternativeMacAddress = AlternativeMacAddress(addressProvider).getAlternativeMacAddress()
 
-        assertTrue(alternativeMacAddress.getAlternativeMacAddress().isNotEmpty())
+        assertTrue(getAlternativeMacAddress.isNotEmpty())
     }
 
 
     @Test
     fun `ssaId, wideVineId 값이 모두 "" 인 경우, TemporaryDateData 를 반환한다`() {
 
+        Mockito.`when`(ssaId.getAddress()).thenReturn(EMPTY)
+        Mockito.`when`(wideVineId.getAddress()).thenReturn(EMPTY)
 
-        Mockito.`when`(ssaId.getAddress()).thenReturn("")
-        Mockito.`when`(wideVineId.getAddress()).thenReturn("")
-        val addressProvider2 = AddressProvider(ssaId, wideVineId)
+        addressProvider = AddressProvider(ssaId, wideVineId)
 
-        print(addressProvider2.create().toString())
-
-        assertTrue(addressProvider2.create() is TemporaryDateData)
-
-    }
-
-    @Test
-    fun `ssaId, wideVineId 값이 모두 "" 이 아닌 경우, TransformDigitAddress 를 반환한다`() {
-
-
-        Mockito.`when`(ssaId.getAddress()).thenReturn("asdv1wdweh")
-        Mockito.`when`(wideVineId.getAddress()).thenReturn("asdoij1[o2i")
-        val addressProvider2 = AddressProvider(ssaId, wideVineId)
-
-        print(addressProvider2.create().toString())
-
-        assertTrue(addressProvider2.create() is TransformDigitAddress)
-
+        assertTrue(addressProvider.create() is TemporaryDateData)
     }
 
     @Test
     fun `ssaId 값은 존재하고, wideVineId 값이 존재하지 않을 경우, TransformDigitAddress 를 반환한다`() {
 
-
         Mockito.`when`(ssaId.getAddress()).thenReturn("lkaviwen")
-        Mockito.`when`(wideVineId.getAddress()).thenReturn("")
-        val addressProvider2 = AddressProvider(ssaId, wideVineId)
+        Mockito.`when`(wideVineId.getAddress()).thenReturn(EMPTY)
 
-        print(addressProvider2.create().toString())
+        addressProvider = AddressProvider(ssaId, wideVineId)
 
-        assertTrue(addressProvider2.create() is TransformDigitAddress)
-
+        assertTrue(addressProvider.create() is TransformDigitAddress)
     }
 
     @Test
     fun `wideVineId 값은 존재하고, ssaId 값이 존재하지 않을 경우, TransformDigitAddress 를 반환한다`() {
 
-
-        Mockito.`when`(ssaId.getAddress()).thenReturn("")
+        Mockito.`when`(ssaId.getAddress()).thenReturn(EMPTY)
         Mockito.`when`(wideVineId.getAddress()).thenReturn("qwopenobn;'")
-        val addressProvider2 = AddressProvider(ssaId, wideVineId)
 
-        print(addressProvider2.create().toString())
+        addressProvider = AddressProvider(ssaId, wideVineId)
 
-        assertTrue(addressProvider2.create() is TransformDigitAddress)
-
-    }
-
-
-    @Test
-    fun `넘어온 값이 "" 일 경우, "" 으로 반환해야 한다`() {
-
-        val convertHashCode = ConvertHashCode("")
-
-        Assert.assertTrue(convertHashCode.getAddress().isEmpty())
-        Assert.assertEquals(convertHashCode.getAddress(), "")
+        assertTrue(addressProvider.create() is TransformDigitAddress)
     }
 
     @Test
     fun `넘어온 값을 해시코드화 했을때, 문자열에 숫자만 있어야 한다`() {
+
         val convertHashCode = ConvertHashCode("adfevn")
 
-        Assert.assertTrue(
-            convertHashCode.getAddress()
-                .replace("[^0-9]", "").length == convertHashCode.getAddress().length
-        )
+        assertTrue(convertHashCode.getAddress().replace("[^0-9]", "").length == convertHashCode.getAddress().length)
     }
 
-    @Test
-    fun `ssaId 값은 항상 null 이 아니어야 한다`() {
-
-        val ssaId = SSAId(context)
-
-        Assert.assertTrue(ssaId.getAddress() != null)
-
-    }
 
     @Test
     fun `일시적인 날짜 데이터 값은 항상 12자리이어야 한다`() {
 
         val temporaryDateData = TemporaryDateData()
 
-        Assert.assertTrue(temporaryDateData.getAddress().length == 12)
+        assertTrue(temporaryDateData.getAddress().length == TWELVE_DIGIT)
 
     }
 
@@ -169,7 +140,7 @@ class AlternativeMacAddressTest {
 
         val transformDigitAddress = TransformDigitAddress("11111111111123")
 
-        assertTrue(transformDigitAddress.getAddress().length == 12)
+        assertTrue(transformDigitAddress.getAddress().length == TWELVE_DIGIT)
 
         junit.framework.Assert.assertEquals(transformDigitAddress.getAddress(), "111111111111")
     }
@@ -179,7 +150,7 @@ class AlternativeMacAddressTest {
 
         val transformDigitAddress = TransformDigitAddress("11111")
 
-        assertTrue(transformDigitAddress.getAddress().length == 12)
+        assertTrue(transformDigitAddress.getAddress().length == TWELVE_DIGIT)
 
         junit.framework.Assert.assertEquals(transformDigitAddress.getAddress(), "111113440344")
 
@@ -188,11 +159,14 @@ class AlternativeMacAddressTest {
     @Test
     fun `wideVineId 값은 항상 null 이 아니어야 한다`() {
 
-        val wideVineId = WideVineId()
-
-        Assert.assertTrue(wideVineId.getAddress() != null)
-
+        wideVineId = WideVineId()
+        assertTrue(wideVineId.getAddress() != null)
     }
 
+    @Test
+    fun `ssaId 값은 항상 null 이 아니어야 한다`() {
 
+        ssaId = SSAId(context)
+        assertTrue(ssaId.getAddress() != null)
+    }
 }
