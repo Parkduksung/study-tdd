@@ -5,11 +5,7 @@ import kotlin.math.abs
 
 class ConvertHashCode(private val notConvertAddress: String) : Address {
     override fun getAddress(): String {
-        return if (notConvertAddress != "") {
-            abs(notConvertAddress.hashCode()).toString()
-        } else {
-            ""
-        }
+        return abs(notConvertAddress.hashCode()).toString()
     }
 }
 

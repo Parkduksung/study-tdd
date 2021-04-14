@@ -11,13 +11,10 @@ class WideVineId : Address {
         return try {
             val mediaDrm = MediaDrm(UUID(-0x121074568629b532L, -0x5c37d8232ae2de13L))
             val wideVineId = mediaDrm.getPropertyByteArray(MediaDrm.PROPERTY_DEVICE_UNIQUE_ID)
-            val toEncoder = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                java.util.Base64.getEncoder().encodeToString(wideVineId).trim()
-            } else {
+            val toEncoder =
                 Base64.encodeToString(wideVineId, Base64.DEFAULT).trim()
-            }
 
-            if (toEncoder != "") {
+            if (toEncoder.isNotEmpty()) {
                 toEncoder
             } else {
                 ""

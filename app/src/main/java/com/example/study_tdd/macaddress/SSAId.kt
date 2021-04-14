@@ -10,7 +10,7 @@ class SSAId(private val context: Context) : Address {
         return try {
             val getSSAId =
                 Settings.Secure.getString(context.contentResolver, Settings.Secure.ANDROID_ID)
-            if (getSSAId != null && getSSAId != "") {
+            if (!getSSAId.isNullOrEmpty()) {
                 getSSAId
             } else {
                 ""
